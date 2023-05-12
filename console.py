@@ -12,7 +12,7 @@ class HBNBCommand(cmd.Cmd):
 
     prompt = '(hbnb) '
     classList = ["BaseModel", "User", "Place", "City", "State",
-                  "Amenity", "Review"]
+                 "Amenity", "Review"]
 
     def do_EOF(self, line):
         """End of File"""
@@ -135,6 +135,7 @@ class HBNBCommand(cmd.Cmd):
                     print("** no instance found **")
                 else:
                     print(storage.all()[key])
-                            
+
+
 if __name__ == '__main__':
     HBNBCommand().cmdloop()
