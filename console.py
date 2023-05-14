@@ -22,9 +22,32 @@ class HBNBCommand(cmd.Cmd):
                  ]
 
     def default(self, line):
-        """Catch commands if nothing else matches then."""
-        # print("DEF:::", line)
-        self._precmd(line)
+        """The default method to use with command"""
+        line = line.replace('(', ' ').replace(')', ' ').replace('.', ' ')
+        line = line.replace(',', '').replace("'", '').replace('"', '')
+        args = line.split(" ")
+        args.remove("")
+        cmd = args[1] if len(args) > 1 else None
+        if cmd == "update":
+            if "{" in line:
+                line = line.replace('{', '').replace('}', '').replace(':', '')
+                args = line.split(" ")
+                args.remove("")
+                static = args[0] + " " + args[2]
+                while len(args) >= 5:
+                    variable = args[3] + " " + args[4]
+                    args.remove(args[3])
+                    args.remove(args[3])
+                    argument = static + " " + variable
+                    eval('self.do_update' + '(argument)')
+                return
+        argument = ""
+        for arg in args:
+            argument = argument + arg + " "
+        try:
+            eval('self.do_' + cmd + '(argument)')
+        except Exception:
+            print("** invalid command **")
 
     def _precmd(self, line):
         """Intercepts commands to test for class.syntax()"""
@@ -157,6 +180,17 @@ class HBNBCommand(cmd.Cmd):
                     value = float(value)
             setattr(storage.all()[key], attr, value)
             storage.all()[key].save()
+
+    def do_count(self, args):
+        """Count instance the instance of classs"""
+        count = 0
+        all_objs = storage.all()
+        for key in all_objs.keys():
+            key_split = key.split(".")
+            key_cls = key_split[0]
+            if key_cls == args:
+                count = count + 1
+        print(count)
 
 
 if __name__ == '__main__':
