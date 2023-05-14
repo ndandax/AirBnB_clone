@@ -22,9 +22,9 @@ class BaseModel:
             for key, value in kwargs.items():
                 if key == 'created_at' or key == 'updated_at':
                     dt_format = "%Y-%m-%dT%H:%M:%S.%f"
-                    self.__dict__[key] = datetime.strptime(dt_string, dt_format)
+                    self.__dict__[key] = datetime.strptime(value, dt_format)
                 else:
-                    self.__dict__[key] = dt_string
+                    self.__dict__[key] = value
         else:
             models.storage.new(self)
 
