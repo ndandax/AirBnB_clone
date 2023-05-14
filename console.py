@@ -12,8 +12,14 @@ class HBNBCommand(cmd.Cmd):
     """class for command line interpreter"""
 
     prompt = '(hbnb) '
-    classList = ["BaseModel", "User", "Place", "City", "State",
-                  "Amenity", "Review"]
+    classList = ["BaseModel",
+                 "User",
+                 "Place",
+                 "City",
+                 "State",
+                 "Amenity",
+                 "Review"
+                 ]
 
     def default(self, line):
         """Catch commands if nothing else matches then."""
@@ -151,6 +157,7 @@ class HBNBCommand(cmd.Cmd):
                     value = float(value)
             setattr(storage.all()[key], attr, value)
             storage.all()[key].save()
+
 
 if __name__ == '__main__':
     HBNBCommand().cmdloop()
