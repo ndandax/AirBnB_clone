@@ -30,7 +30,7 @@ To get started with this project, you need to clone the repository from GitHub. 
 
 bash
 
-git clone https://github.com/jzamora5/AirBnB_clone.git
+git clone https://github.com/ndandax/AirBnB_clone.git
 
 After cloning the repository, you will have a folder called AirBnB_clone, which will contain several files that allow the program to work.
 
