@@ -80,12 +80,17 @@ class HBNBCommand(cmd.Cmd):
         args = instance.split()
         if len(args) == 0:
             print("** class name missing **")
-        if args[0] not in HBNBCommand.classList:
-            print("** class doesn't exist **")
-        else:
-            new_instance = eval(args[0])()
-            new_instance.save()
-            print(new_instance.id)
+        if args:
+            try:
+                if args[0] not in HBNBCommand.classList:
+                    print("** class doesn't exist **")
+                else:
+                    new_instance = eval(args[0])()
+                    new_instance.save()
+                    print(new_instance.id)
+            except Exception:
+                pass
+
 
     def do_show(self, arg):
         """It Prints the string representation of an instance"""
@@ -134,11 +139,18 @@ class HBNBCommand(cmd.Cmd):
 
         args = arg.split()
         objs = storage.all()
-        if args[0] not in HBNBCommand.classList:
-            print("** class doesn't exist **")
+        if args:
+            try:
+                if args[0] not in HBNBCommand.classList:
+                    print("** class doesn't exist **")
+                else:
+                    ss = [str(obj) for key, obj in storage.all().items()
+                          if type(obj).__name__ == args[0]] 
+                    print(ss)                   
+            except Exception:
+                pass
         else:
-            ss = [str(obj) for key, obj in storage.all().items()
-                  if type(obj).__name__ == args[0]]
+            ss = [str(obj) for key, obj in storage.all().items()]
             print(ss)
 
     def do_count(self, arg):
