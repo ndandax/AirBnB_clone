@@ -1,4 +1,4 @@
-#!/usr/bin/bash python3
+#!/usr/bin/python3
 """A file containing class FileStorage that serializes instances
  to a JSON file and deserializes JSON file to instances"""
 import json

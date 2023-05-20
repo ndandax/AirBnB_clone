@@ -5,6 +5,10 @@ import json
 from models import storage
 from models.base_model import BaseModel
 from models.user import User
+from models.state import State
+from models.place import Place
+from models.review import Review
+from models.city import City
 import re
 
 
@@ -120,12 +124,23 @@ class HBNBCommand(cmd.Cmd):
     def do_all(self, arg):
         """It prints : Prints all string representation of
         all instances based or not on the class name"""
+        # args = arg.split()
+        # objs = storage.all()
+        # if len(args) > 0 and args[0] not in HBNBCommand.classList:
+        #     print("** class doesn't exist **")
+        # else:
+        #     print([str(objs[obj]) for obj in objs])
+
         args = arg.split()
         objs = storage.all()
-        if len(args) > 0 and args[0] not in HBNBCommand.classList:
+        if args[0] not in HBNBCommand.classList:
             print("** class doesn't exist **")
         else:
-            print([str(objs[obj]) for obj in objs])
+            ss = [str(obj) for key, obj in storage.all().items()
+                      if type(obj).__name__ == args[0]]
+            print(ss)
+            #print([str(objs[obj]) for obj in objs])
+        
 
     def do_update(self, line):
         """it updates an instance based on the class name and id"""
