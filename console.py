@@ -9,6 +9,7 @@ from models.state import State
 from models.place import Place
 from models.review import Review
 from models.city import City
+from models.amenity import Amenity
 import re
 
 
@@ -137,10 +138,8 @@ class HBNBCommand(cmd.Cmd):
             print("** class doesn't exist **")
         else:
             ss = [str(obj) for key, obj in storage.all().items()
-                      if type(obj).__name__ == args[0]]
+                  if type(obj).__name__ == args[0]]
             print(ss)
-            #print([str(objs[obj]) for obj in objs])
-        
 
     def do_update(self, line):
         """it updates an instance based on the class name and id"""
